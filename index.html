@@ -297,9 +297,11 @@
 			display: inline-block;
 			width: auto;
 			height: auto;
+			user-select: none;
 		}
 		#page2{
 			z-index: 0;
+			user-select: none;
 			top: 180px;
 		}
 		.card{
@@ -316,6 +318,7 @@
 			margin: 3px;
 			border: none;
 			border-radius: 7px;
+			user-select: none;
 		}
 		.card:hover{
 			box-shadow: 0 0 15px black;
@@ -335,12 +338,56 @@
             font-size: 1.2em;
             transition: 0.15s all;
 			cursor: pointer;
+			user-select: none;
         }
 		.ntda{
 			font-size: 1.2em;text-decoration: none;
 		}
 		body {
 			white-space: nowrap;
+		}
+		footer{
+			text-align: center;
+			border-radius: 70px;
+			background: rgba(150, 150, 150, .37);
+			box-shadow: 0 0 10px black;
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			transform: translate(-50%, -50%);
+			font-size: 0.2em;
+		}
+		footer a{
+			text-decoration: none;
+			color: white;
+			text-shadow: 0 0 5px black;
+			display: inline-block;
+			cursor: pointer;
+		}
+		footer p{
+			display: inline-block;
+			color: white;
+			cursor: pointer;
+		}
+		footer a:visited{
+			color: white;
+		}
+		footer a:active{
+			color: gray;
+		}
+		.about{
+			z-index: 999999;
+			display: inline-block;
+			border: none;
+			border-radius: 10px;
+			background: rgba(255, 255, 255, .85);
+			box-shadow: 0 0 15px black;
+			text-align: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 300px;
 		}
 		@media screen and (max-width: 768px){
 			#dv{
@@ -376,11 +423,77 @@
 				transform-origin: top right;
 				transform: scale(0.4);
 			}
+			footer{
+				text-align: center;
+				border-radius: 70px;
+				background: rgba(150, 150, 150, .37);
+				box-shadow: 0 0 10px black;
+				position: absolute;
+				left: 50%;
+				bottom: -50%;
+				transform: translateX(-50%) scale(0.4);
+				font-size: 0.2em;
+		}
+		}
+		*:not(.ipt){
+			user-select: none;
+		}
+		@font-face {
+			font-family: "iconfont"; /* Project id 4647028 */
+			src: url('https://at.alicdn.com/t/c/font_4647028_g72pp6l3obc.woff2?t=1723077588773') format('woff2'),
+				url('https://at.alicdn.com/t/c/font_4647028_g72pp6l3obc.woff?t=1723077588773') format('woff'),
+				url('https://at.alicdn.com/t/c/font_4647028_g72pp6l3obc.ttf?t=1723077588773') format('truetype');
+		}
+
+		.iconfont {
+			font-family: "iconfont" !important;
+			font-size: 16px;
+			font-style: normal;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		.icon-sougou:before {
+			content: "\e62f";
+		}
+
+		.icon-gugesousuo:before {
+			content: "\ea89";
+		}
+
+		.icon-sousuo1:before {
+			content: "\ead6";
+		}
+
+		.icon-biyingsousuo:before {
+			content: "\e608";
+		}
+
+		.icon-baidu:before {
+			content: "\e612";
+		}
+
+		.icon-sousuo:before {
+			content: "\e678";
+		}
+		.save{
+			width: 75px;
+			height: 35px;
+			background: rgb(26, 255, 26);
+			border: none;
+			border-radius: 10px;
+			transition: 0.3s all;
+		}
+		.save:hover{
+			background: rgb(130, 255, 130);
+			box-shadow: 0 0 15px lightgreen;
+		}
+		.save:active{
+			background: rgb(70, 255, 70);
 		}
     </style>
 </head>
 <body id="bd">
-	<link rel="stylesheet" href="iconfont/iconfont.css">
 	<div id="std" style="display: none;transition: 0.36s all;">
 		<div id="set" class="set" style="overflow: hidden;">
 			<button class="setting_btn" onclick="closestp();" id="cls">×</button>
@@ -418,12 +531,24 @@
 				<div class="menuop" id='google'><i class="iconfont icon-gugesousuo"></i>&nbsp;谷歌</div>
 			</div>
 		</div>
-		<div id="page2" class="tstn" style="opacity: 0;z-index: 0;display: none;" disabled>
-			<h1 style="font-size: 2.5em;text-align: center;">书签</h1><br><br>
+		<div id="page2" class="tstn" style="opacity: 0;z-index: 0;display: none;" disabled><br><br>
 			<center>
-				<button class="btn1" onclick="savewb();">增加书签</button>
-			</center>
+				<button class="btn1" onclick="savewb();">增加书签</button>&nbsp;<button class="btn1" onclick="opentextb();">记事本</button>
+			</center><br><br>
 			<div class="center" id="ctn"></div>
+		</div>
+		<div id="about" class="about" style="display: none;">
+			<button class="setting_btn" style="border-radius: 10px;width: 30px;height: 30px;font-size: 1em;" onclick="closeabt();">×</button>
+			<h1 style="color: lightblue;">XXX起始页</h1>
+			<p>本网站是XXX的XXX起始页</p><br>
+			<p>本网站是XXXX年XX月XX日上线的</p><br><br>
+			<p>感谢您访问XXX起始页！</p>
+		</div>
+		<div id="textb" class="about" style="display: none;width: auto;height: auto;">
+			<button class="setting_btn" style="border-radius: 10px;width: 30px;height: 30px;font-size: 1em;" onclick="closetextb();">×</button>
+			<h1 style="color: lightblue;">记事本</h1>
+			<textarea style="resize: none;width: 600px;height: 380px;outline: none;background-color: transparent;white-space: nowrap;" placeholder="输入内容..." id="textarea"></textarea><br>
+			<button class="save" onclick="savetext();">保存</button><br><br>
 		</div>
         <script>
             var body = $('bd');
@@ -499,6 +624,7 @@
 						addwb(sv.n, sv.u, 0);
 					}
 				}
+				$('textarea').value = localStorage.getItem('text');
             }
 			wod.addEventListener('focus', function(){
 				slc.style = "opacity: 1;";
@@ -573,11 +699,33 @@
 					to_page1();
 				}
 			}
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				alert("抱歉，当前网站不支持移动端访问，因为布局可能受影响，所以建议到电脑端上。")
+			var about = $('about');
+			function openabt(){
+				about.style.display = "inline-block";
 			}
-			console.log(localStorage.getItem('wbst'));
+			function closeabt(){
+				about.style.display = "none";
+			}
+			var textb = $('textb');
+			function opentextb(){
+				textb.style.display = "inline-block";
+			}
+			function closetextb(){
+				textb.style.display = "none";
+			}
+			function savetext(){
+				try{
+					localStorage.setItem('text', $('textarea').value);
+					alert('保存成功！');
+				}
+				catch(e){
+					alert(e);
+				}
+			}
         </script>
     </div>
+	<footer id="footer">
+		&nbsp;<a onclick="openabt();">关于</a><p>|&nbsp;&nbsp;&copy;2024 版权所有CZ工作室</p>&nbsp;
+	</footer>
 </body>
 </html>
